@@ -1,0 +1,9 @@
+contador_a = 0
+
+for i in range(50):
+    caracter = input("Ingrese un carácter: ")
+    
+    if caracter == 'a':
+        contador_a += 1
+
+print("La letra 'a' se repite", contador_a, "veces")
