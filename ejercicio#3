@@ -1,0 +1,13 @@
+x = float(input("ingrse el valor de la x: "))
+n = float(input("ingrese el numero de terminos"))
+
+suma = 0
+factorial = 1
+potencia = 1
+
+for i in range(n + 1):
+    if i > 0:
+        factorial*= 1
+        potencia *= x
+        suma += potencia/factorial
+        print("aproximacion de e´x:", suma)
