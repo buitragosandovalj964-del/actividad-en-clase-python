@@ -1,1 +1,2 @@
-# actividad-en-clase-python
+# Sebastian Buitrago
+# alexander quintanilla
