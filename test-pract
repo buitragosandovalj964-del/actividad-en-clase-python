@@ -1,0 +1,161 @@
+def main():
+    while True:
+        menu()
+        opcion = input("Seleccione: ")
+
+        if opcion == "1":
+            agregar_usuario()
+        elif opcion == "2":
+            crear_prestamo()
+        elif opcion == "3":
+            break
+
+
+def buscar_usuario(lista, id_buscar):
+    for usuario in lista:
+        if usuario["id"] == id_buscar:
+            return usuario
+    return None
+
+impedir préstamo si herramienta ya está prestada.
+
+def crear_prestamo(usuarios, herramientas, prestamos):
+
+    id_usuario = input("ID usuario: ")
+    usuario = buscar_por_id(usuarios, id_usuario)
+
+    if not usuario:
+        print("Usuario no existe")
+        return
+
+    id_herramienta = input("ID herramienta: ")
+    herramienta = buscar_por_id(herramientas, id_herramienta)
+
+    if not herramienta:
+        print("Herramienta no existe")
+        return
+
+    if herramienta["prestada"]:
+        print("Herramienta ya prestada")
+        return
+
+    prestamo = {
+        "usuario": id_usuario,
+        "herramienta": id_herramienta
+    }
+
+    prestamos.append(prestamo)
+    herramienta["prestada"] = True
+
+    print("Prestamo exitoso")
+
+------------------------------------------
+
+
+
+def historial_usuario(usuarios, prestamos):
+
+    id_usuario = input("Ingrese ID del usuario: ")
+
+    # Validar que el usuario exista
+    usuario = buscar_por_id(usuarios, id_usuario)
+
+    if not usuario:
+        print("Usuario no existe")
+        return
+
+    print(f"\nHistorial de prestamos de {usuario['nombre']}:")
+
+    encontrados = False
+
+    for prestamo in prestamos:
+        if prestamo["id_usuario"] == id_usuario:
+            print(prestamo)
+            encontrados = True
+
+    if not encontrados:
+        print("Este usuario no tiene prestamos registrados.")
+------------------------------------------------------------------
+
+
+def eliminar_herramienta(herramientas):
+
+    id_buscar = input("Ingrese ID de la herramienta a eliminar: ")
+
+    herramienta = buscar_por_id(herramientas, id_buscar)
+
+    if not herramienta:
+        print("Herramienta no existe.")
+        return
+
+    if herramienta["prestada"]:
+        print("No se puede eliminar. La herramienta está prestada.")
+        return
+
+    herramientas.remove(herramienta)
+
+    print("Herramienta eliminada correctamente.")
+------------------------------------------------------------------------
+def buscar_por_id(lista, id_buscar):
+    for elemento in lista:
+        if elemento["id"] == id_buscar:
+            return elemento
+    return None
+------------------------------------------------------------------------
+def contar_prestamos_activos(prestamos, id_usuario):
+
+    contador = 0
+
+    for prestamo in prestamos:
+        if prestamo["id_usuario"] == id_usuario and prestamo["activo"]:
+            contador += 1
+
+    return contador
+
+
+
+def crear_prestamo(usuarios, herramientas, prestamos):
+
+    id_usuario = input("ID usuario: ")
+    usuario = buscar_por_id(usuarios, id_usuario)
+
+    if not usuario:
+        print("Usuario no existe.")
+        return
+
+    # 🚨 VALIDACIÓN NUEVA
+    activos = contar_prestamos_activos(prestamos, id_usuario)
+
+    if activos >= 3:
+        print("Este usuario ya tiene 3 prestamos activos.")
+        return
+
+    id_herramienta = input("ID herramienta: ")
+    herramienta = buscar_por_id(herramientas, id_herramienta)
+
+    if not herramienta:
+        print("Herramienta no existe.")
+        return
+
+    if herramienta["prestada"]:
+        print("Herramienta ya prestada.")
+        return
+
+    nuevo_prestamo = {
+        "id_usuario": id_usuario,
+        "id_herramienta": id_herramienta,
+        "activo": True
+    }
+
+    prestamos.append(nuevo_prestamo)
+    herramienta["prestada"] = True
+
+    print("Prestamo creado correctamente.")
+
+
+
+
+
+
+
+
